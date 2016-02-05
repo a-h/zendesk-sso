@@ -1,0 +1,25 @@
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <AssemblyName>ZendeskSSO</AssemblyName>
+        <OutputPath>bin\</OutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="*.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="..\packages\JWT.1.3.4\lib\3.5\JWT.dll">
+        <HintPath>..\packages\JWT.1.3.4\lib\3.5\JWT.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <Target Name="Build">
+        <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
+        <Csc TargetType="library" References="@(Reference)" Sources="@(Compile)" OutputAssembly="$(OutputPath)$(AssemblyName).dll" />
+        <Copy SourceFiles="@(Reference)" DestinationFolder="$(OutputPath)" />
+    </Target>
+
+</Project>
